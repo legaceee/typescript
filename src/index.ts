@@ -87,17 +87,95 @@ function greet2(details: {
 interface People {
   name: string;
   age: number;
-  // greet: () => string;
+  isLegal(): boolean;
 }
 
 class Manager implements People {
-  name: string;
-  age: number;
-  number: string; //minimum People feild chaiye hogi mtlb name aur age uske baad aur bhi kuch add kr skte h woh humare pe h
-  constructor(name: string, age: number) {
+  //minimum People feild chaiye hogi mtlb name aur age uske baad aur bhi kuch add kr skte h woh humare pe h
+  constructor(public name: string, public age: number) {
     this.name = name;
     this.age = age;
-    this.number = "2346567";
+  }
+  isLegal() {
+    return this.age > 18;
   }
 }
 let user3 = new Manager("john", 30);
+// we cannot do union intersection in instance
+
+//types
+//we cannot do implements in class in types
+
+type Person = {
+  name: string;
+  age: number;
+};
+type Father = {
+  name: string;
+  children: boolean;
+};
+
+///union of two types
+
+type Married = Person & Father;
+let legaceee: Married = {
+  name: "legaceee",
+  age: 45,
+  children: true,
+};
+function wDablus(user: Person): boolean {
+  return user.age > 18;
+}
+//intersection of two types
+
+type GoodUser = {
+  name: string;
+  gift: string;
+};
+
+type BadUser = {
+  name: string;
+  ip: string;
+};
+type Avguser = GoodUser | BadUser;
+
+const hero: Avguser = {
+  name: "legaceee",
+  gift: "yes",
+  ip: "dfjdfsdfh",
+};
+
+//arrays
+interface Workers {
+  name: string;
+  age: number;
+}
+
+function legally(people: Workers[]): Workers[] {
+  let arr = people.filter((p) => p.age > 18);
+  return arr;
+}
+let aman: Workers[] = [
+  {
+    name: "aman",
+    age: 24,
+  },
+  {
+    name: "wwe",
+    age: 12,
+  },
+  {
+    name: "smrithi",
+    age: 24,
+  },
+  {
+    name: "mayank",
+    age: 17,
+  },
+  {
+    name: "yoo",
+    age: 26,
+  },
+];
+
+legally(aman);
